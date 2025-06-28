@@ -1,7 +1,8 @@
 import { jsPDF } from "jspdf";
 import { logCVDownload, logCVPreview } from "./analytics";
 
-const profileImage = "/adil_rounded_border.png";
+// Image is served from the public folder
+const profileImage = '/adil_rounded_border.png';
 
 export const generateCV = async (
   mode: "preview" | "download" = "download",
@@ -34,45 +35,48 @@ export const generateCV = async (
     return y + lines.length * lineHeight;
   };
 
-  // Helper function to load image and convert to base64 with better error handling
+  // Helper function to load image and convert to base64
   const loadImageAsBase64 = async (
     url: string,
   ): Promise<string> => {
-    try {
-      const controller = new AbortController();
-      const timeoutId = setTimeout(
-        () => controller.abort(),
-        10000,
-      ); // 10 second timeout
-
-      const response = await fetch(url, {
-        signal: controller.signal,
-        mode: "cors",
-        headers: {
-          Accept: "image/*",
-        },
-      });
-
-      clearTimeout(timeoutId);
-
-      if (!response.ok) {
-        throw new Error(
-          `HTTP error! status: ${response.status}`,
-        );
-      }
-
-      const blob = await response.blob();
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = () => resolve(reader.result as string);
-        reader.onerror = reject;
-        reader.readAsDataURL(blob);
-      });
-    } catch (error) {
-      console.warn("Failed to load profile image:", error);
-      // Return empty string to use fallback
-      return "";
-    }
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.crossOrigin = 'anonymous'; // Enable CORS
+      
+      img.onload = () => {
+        try {
+          // Create canvas to convert image to base64
+          const canvas = document.createElement('canvas');
+          const ctx = canvas.getContext('2d');
+          
+          if (!ctx) {
+            resolve('');
+            return;
+          }
+          
+          canvas.width = img.width;
+          canvas.height = img.height;
+          
+          // Draw image on canvas
+          ctx.drawImage(img, 0, 0);
+          
+          // Convert to base64
+          const dataURL = canvas.toDataURL('image/png');
+          resolve(dataURL);
+        } catch (error) {
+          console.warn('Failed to convert image to base64:', error);
+          resolve('');
+        }
+      };
+      
+      img.onerror = () => {
+        console.warn('Failed to load profile image from:', url);
+        resolve('');
+      };
+      
+      // Set the image source
+      img.src = url;
+    });
   };
 
   // Helper function to check if new page is needed
@@ -187,14 +191,36 @@ export const generateCV = async (
     "adolrashid73@gmail.com",
     "WhatsApp: +8801874427853",
     "Dhamrai, Dhaka, Bangladesh",
-    "linkedin.com/in/md-adilur-rashid-418a96171",
+    "View my portfolio",
   ];
 
   // Position contact info in the right section, right-aligned
   contactLines.forEach((line, index) => {
     const lineWidth = doc.getTextWidth(line);
     const contactX = contactStartX + contactWidth - lineWidth; // Right align within contact section
-    doc.text(line, contactX, 19 + index * 4.5);
+    
+    // Style the portfolio line differently to look like a link and make it clickable
+    if (line === "View my portfolio") {
+      doc.setTextColor(41, 128, 185); // Blue color for link
+      doc.setFont("helvetica", "normal");
+      
+      const yPos = 19 + index * 4.5;
+      doc.text(line, contactX, yPos);
+      
+      // Add underline to make it look more like a link
+      const underlineY = yPos + 0.5;
+      doc.setDrawColor(41, 128, 185);
+      doc.setLineWidth(0.2);
+      doc.line(contactX, underlineY, contactX + lineWidth, underlineY);
+      
+      // Make it clickable - add link annotation
+      doc.link(contactX, yPos - 3, lineWidth, 6, { url: 'https://adils-portfolio.web.app' });
+      
+      // Reset color for other lines
+      doc.setTextColor(accentColor[0], accentColor[1], accentColor[2]);
+    } else {
+      doc.text(line, contactX, 19 + index * 4.5);
+    }
   });
 
   yPosition = 55;
@@ -249,8 +275,8 @@ export const generateCV = async (
   doc.setTextColor(textColor[0], textColor[1], textColor[2]);
 
   const keyAchievements = [
-    "Generated 1.5 crore BDT sales within 3 months",
-    "Contributed as core team member in securing USD 1.1 Million investment",
+    "Solely designed UI/UX of an app for non-tech-savvy users, resulting in 1.5 crore BDT in sales within 3 months",
+    "Helped secure USD 1.1M investment by designing impactful user-first products and working closely with the founders",
     "Led cross-functional teams across multiple product launches",
     "Designed major B2B applications: Fashol ERP, Fashol Shelf, Fashol Retail, Banijjo, Jogaan",
   ];
@@ -645,7 +671,7 @@ export const generateCV = async (
   doc.setFont("helvetica", "bold");
   doc.setTextColor(textColor[0], textColor[1], textColor[2]);
   doc.text(
-    "BSE in Computer Science & Engineering",
+    "BSc in Computer Science & Engineering",
     margin,
     yPosition,
   );
@@ -655,8 +681,7 @@ export const generateCV = async (
     accentColor[1],
     accentColor[2],
   );
-  const bscStatusText =
-    "Currently on Hiatus (5/9 semesters completed)";
+  const bscStatusText = "Hiatus";
   const bscStatusWidth = doc.getTextWidth(bscStatusText);
   doc.text(
     bscStatusText,
@@ -799,14 +824,25 @@ export const generateCV = async (
   const mottoWidth = doc.getTextWidth(motto);
   doc.text(motto, (pageWidth - mottoWidth) / 2, yPosition);
 
+  // Create filename with name and phone (used for both preview and download)
+  const fileName = "MD_Adilur_Rashid_+8801874427853_CV.pdf";
+
   // Handle preview or download
   if (mode === "preview") {
     // Log analytics event for preview
     logCVPreview();
 
-    // Generate PDF as blob and open in new tab
+    // Generate PDF as blob and open in new tab with custom filename
     const pdfBlob = doc.output("blob");
     const blobUrl = URL.createObjectURL(pdfBlob);
+    
+    // Create a temporary link element to set the filename for preview
+    const link = document.createElement('a');
+    link.href = blobUrl;
+    link.download = fileName;
+    link.target = '_blank';
+    
+    // Trigger the preview with custom filename
     window.open(blobUrl, "_blank");
 
     // Clean up the blob URL after a delay to prevent memory leaks
@@ -816,9 +852,9 @@ export const generateCV = async (
   } else {
     // Log analytics event for download
     logCVDownload();
-
+    
     // Download the PDF
-    doc.save("Adilur_Rashid_CV.pdf");
+    doc.save(fileName);
   }
 };
 

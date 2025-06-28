@@ -172,7 +172,7 @@ export default function Projects() {
               {mobileApps.map((app, index) => (
                 <Card
                   key={index}
-                  className="hover:shadow-lg transition-shadow group"
+                  className="hover:shadow-lg transition-shadow group h-full flex flex-col"
                 >
                   <CardHeader>
                     <div className="flex items-center justify-between mb-4">
@@ -192,7 +192,7 @@ export default function Projects() {
                       {app.title}
                     </CardTitle>
                   </CardHeader>
-                  <CardContent className="space-y-4">
+                  <CardContent className="space-y-4 flex-grow flex flex-col">
                     <p className="text-muted-foreground leading-relaxed text-sm">
                       {app.description}
                     </p>
@@ -207,6 +207,7 @@ export default function Projects() {
                         </Badge>
                       ))}
                     </div>
+                    <div className="flex-grow"> </div>
                     <div className="pt-2">
                       <PlayStoreButton
                         url={app.playStoreUrl}
@@ -229,7 +230,7 @@ export default function Projects() {
               {webPlatforms.map((platform, index) => (
                 <Card
                   key={index}
-                  className="hover:shadow-lg transition-shadow group"
+                  className="hover:shadow-lg transition-shadow group h-full flex flex-col"
                 >
                   <CardHeader>
                     <div className="flex items-center justify-between mb-4">
@@ -247,7 +248,7 @@ export default function Projects() {
                       {platform.title}
                     </CardTitle>
                   </CardHeader>
-                  <CardContent className="space-y-4">
+                  <CardContent className="space-y-4 flex-grow flex flex-col">
                     <p className="text-muted-foreground leading-relaxed text-sm">
                       {platform.description}
                     </p>
@@ -262,6 +263,7 @@ export default function Projects() {
                         </Badge>
                       ))}
                     </div>
+                    <div className="flex-grow"> </div>
                     <div className="pt-2">
                       <WebPlatformButton
                         url={platform.url}

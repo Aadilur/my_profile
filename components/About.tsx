@@ -26,8 +26,8 @@ export default function About() {
               <p className="text-muted-foreground mb-6 leading-relaxed">
                 At Fashol DotCom Limited, I've had the opportunity to work directly with customers, 
                 conduct in-depth interviews, and analyze pain points to create solutions that generate 
-                real business value. Our B2B applications have achieved remarkable success, including 
-                1.5 crore BDT in sales within just 3 months.
+                real business value. I solely designed the UI/UX of an app for non-tech-savvy users, 
+                which resulted in 1.5 crore BDT in sales within just 3 months.
               </p>
               
               <p className="text-muted-foreground leading-relaxed">

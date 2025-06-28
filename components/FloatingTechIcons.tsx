@@ -21,16 +21,16 @@ import {
 const techIcons = [
   { component: SiFigma, name: 'figma', color: 'text-gray-600' },
   { component: SiAdobexd, name: 'xd', color: 'text-gray-500' },
-  { component: SiDart, name: 'dart', color: 'text-gray-700' },
+  { component: SiDart, name: 'dart', color: 'text-gray-500' },
   { component: FaPython, name: 'python', color: 'text-gray-600' },
-  { component: FaHtml5, name: 'html', color: 'text-gray-500' },
-  { component: FaCss3Alt, name: 'css', color: 'text-gray-700' },
+  { component: FaHtml5, name: 'html', color: 'text-gray-400' },
+  { component: FaCss3Alt, name: 'css', color: 'text-gray-400' },
   { component: FaReact, name: 'react', color: 'text-gray-600' },
   { component: SiTailwindcss, name: 'tailwind', color: 'text-gray-500' },
-  { component: SiJavascript, name: 'javascript', color: 'text-gray-700' },
-  { component: FaJava, name: 'java', color: 'text-gray-600' },
+  { component: SiJavascript, name: 'javascript', color: 'text-gray-400' },
+  { component: FaJava, name: 'java', color: 'text-gray-500' },
   { component: FaNodeJs, name: 'nodejs', color: 'text-gray-500' },
-  { component: FaLinkedin, name: 'linkedin', color: 'text-gray-700' },
+  { component: FaLinkedin, name: 'linkedin', color: 'text-gray-500' },
   { component: FaGithub, name: 'github', color: 'text-gray-600' },
   { component: FaDocker, name: 'docker', color: 'text-gray-500' },
 ];
@@ -65,7 +65,7 @@ export default function FloatingTechIcons() {
     
     const size = Math.random() * 35 + 10; // Increased size from 20-50 to 25-60
     const delay = Math.random() * 12;
-    const opacity = Math.random() * 1 ; // Increased opacity for better visibility: 0.3-0.7
+    const opacity = Math.random() * 0.2 + 0.4; // Increased opacity for better visibility: 0.3-0.7
     
     const IconComponent = icon.component;
     

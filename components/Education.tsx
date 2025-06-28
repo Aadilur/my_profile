@@ -34,7 +34,7 @@ export default function Education() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <GraduationCap size={20} />
-                  BSE in Computer Science & Engineering
+                  BSc in Computer Science & Engineering
                 </CardTitle>
                 <p className="text-primary">Northern University Bangladesh</p>
                 <Badge variant="outline" className="w-fit">

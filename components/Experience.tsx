@@ -4,8 +4,8 @@ import { Building, Calendar, TrendingUp } from "lucide-react";
 
 export default function Experience() {
   const achievements = [
-    "Generated 1.5 crore BDT sales within 3 months after initial product release",
-    "Secured USD 1.1 million investment working directly with CEO",
+    "Solely designed UI/UX of an app for non-tech-savvy users, resulting in 1.5 crore BDT sales within 3 months",
+    "Helped secure USD 1.1M investment by designing impactful user-first products and working closely with the founders",
     "Led design and development teams under high-pressure environments",
     "Conducted extensive UX research with B2B customers",
     "Revamped Fashol website using AI technology in just 6 days"

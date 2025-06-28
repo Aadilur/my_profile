@@ -29,7 +29,11 @@ export default function Contact() {
         {/* Contact Cards */}
         <div className="grid md:grid-cols-3 gap-8 mb-12 max-w-4xl mx-auto">
           {/* Email Card */}
-          <Card className="bg-card border border-border hover:shadow-lg transition-all duration-300 group h-full flex flex-col">
+          <Card 
+            className="bg-card border border-border hover:shadow-lg transition-all duration-300 group h-full flex flex-col cursor-pointer hover:border-primary/30"
+            onClick={handleEmailClick}
+            title="Click to send email"
+          >
             <CardHeader className="flex-shrink-0 pb-4 pt-8">
               <div className="w-16 h-16 bg-primary text-primary-foreground rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-105 transition-transform duration-300">
                 <Mail size={24} />
@@ -38,12 +42,25 @@ export default function Contact() {
             </CardHeader>
             <CardContent className="flex-1 flex flex-col justify-center text-center pb-8">
               <p className="text-muted-foreground mb-3">Send me a message</p>
-              <p className="font-medium text-foreground break-all">adolrashid73@gmail.com</p>
+              <p 
+                className="font-medium text-foreground break-all cursor-pointer hover:text-primary transition-colors duration-200 hover:underline"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleEmailClick();
+                }}
+                title="Click to send email"
+              >
+                adolrashid73@gmail.com
+              </p>
             </CardContent>
           </Card>
           
           {/* WhatsApp Card */}
-          <Card className="bg-card border border-border hover:shadow-lg transition-all duration-300 group h-full flex flex-col">
+          <Card 
+            className="bg-card border border-border hover:shadow-lg transition-all duration-300 group h-full flex flex-col cursor-pointer hover:border-primary/30"
+            onClick={handleWhatsAppClick}
+            title="Click to open WhatsApp"
+          >
             <CardHeader className="flex-shrink-0 pb-4 pt-8">
               <div className="w-16 h-16 bg-primary text-primary-foreground rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-105 transition-transform duration-300">
                 <MessageCircle size={24} />
@@ -52,7 +69,16 @@ export default function Contact() {
             </CardHeader>
             <CardContent className="flex-1 flex flex-col justify-center text-center pb-8">
               <p className="text-muted-foreground mb-3">Quick response guaranteed</p>
-              <p className="font-medium text-foreground">+8801874427853</p>
+              <p 
+                className="font-medium text-foreground cursor-pointer hover:text-primary transition-colors duration-200 hover:underline"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleWhatsAppClick();
+                }}
+                title="Click to open WhatsApp"
+              >
+                +8801874427853
+              </p>
               <div className="inline-flex items-center gap-2 mt-3 px-3 py-1 bg-muted text-muted-foreground rounded-full text-sm justify-center">
                 <div className="w-2 h-2 bg-foreground rounded-full"></div>
                 Highly Active
