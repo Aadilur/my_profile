@@ -1,16 +1,6 @@
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "./ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Badge } from "./ui/badge";
-import {
-  ExternalLink,
-  Globe,
-  Settings,
-  BarChart3,
-} from "lucide-react";
+import { ExternalLink, Globe, Settings, BarChart3 } from "lucide-react";
 import { Button } from "./ui/button";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 
@@ -18,19 +8,15 @@ export default function Projects() {
   // Mobile Apps with Play Store links (reordered by sales impact)
   const mobileApps = [
     {
-      title: "Banijjo",
+      title: "Hyperfarm App",
       description:
-        "Digital marketplace bringing your shop to customers' fingertips. Easy product listing, smart networking, complete shop control, and instant updates through Fashol's digital platform.",
+        "Every meal starts with a farmer. A B2B platform connecting farmers directly with restaurants, retailers, and wholesalers for reliable fresh produce, traceable sourcing, and transparent pricing.",
       playStoreUrl:
-        "https://play.google.com/store/apps/details?id=com.fashol.banijjo&hl=en",
+        "https://play.google.com/store/apps/details?id=com.fashol.hyperfarm",
       iconUrl:
-        "https://play-lh.googleusercontent.com/Qrn3VrfAxcFWITay2AV8dzKd2Kzo37o4Bljg0u4tsEL12oatrC4kitCsY2znxbQJ7g=w240-h480-rw",
-      tags: [
-        "Digital Marketplace",
-        "Shop Management",
-        "Customer Reach",
-      ],
-      impact: "1.5 Cr BDT Sales",
+        "https://play-lh.googleusercontent.com/khzFbcgMcRHvL87IdR5N9jrM8I87g75nVZ2rsQqM0wOO4PmfAeKhMlaL-kpSYwB__AuRyCVjzyWaJE7aXWBL5w=w240-h480-rw",
+      tags: ["B2B Fresh Supply", "Direct Sourcing", "Bulk Procurement"],
+      impact: "Transforming Supply",
     },
     {
       title: "Jogaan",
@@ -40,32 +26,33 @@ export default function Projects() {
         "https://play.google.com/store/apps/details?id=com.fashol.agent&hl=en",
       iconUrl:
         "https://play-lh.googleusercontent.com/n_VkbTVw9w_SgrpWzL1yI0xAaH2Ji7-nDESM3npeEADhkxGhhPYq6HGWdUrIm3LIP8U=w240-h480-rw",
-      tags: [
-        "Farmer Platform",
-        "Product Sourcing",
-        "Market Intelligence",
-      ],
+      tags: ["Farmer Platform", "Product Sourcing", "Market Intelligence"],
       impact: "Farmer Empowerment",
     },
     {
-      title: "Fashol Retail",
+      title: "Banijjo",
       description:
-        "B2B platform for retailers connecting directly with farmers, offering fresh produce at fair prices. Features direct sourcing, real-time pricing, flexible payments, and quality assurance.",
+        "Digital marketplace bringing your shop to customers' fingertips. Easy product listing, smart networking, complete shop control, and instant updates through Fashol's digital platform.",
       playStoreUrl:
-        "https://play.google.com/store/apps/details?id=com.fashol.business&hl=en",
+        "https://play.google.com/store/apps/details?id=com.fashol.banijjo&hl=en",
       iconUrl:
-        "https://play-lh.googleusercontent.com/rTMd7iS7JrwCJwvVOXC94FAzR_wgzWsrgatcqOv_WmEEvlIq-Y0YskM4brt_7WZ48f4=w240-h480-rw",
-      tags: [
-        "B2B Platform",
-        "Retailer Tool",
-        "Connecting Retailers",
-      ],
-      impact: "Retail Growth",
+        "https://play-lh.googleusercontent.com/Qrn3VrfAxcFWITay2AV8dzKd2Kzo37o4Bljg0u4tsEL12oatrC4kitCsY2znxbQJ7g=w240-h480-rw",
+      tags: ["Digital Marketplace", "Shop Management", "Customer Reach"],
+      impact: "1.5 Cr BDT Sales",
     },
   ];
 
   // Web Platforms
   const webPlatforms = [
+    {
+      title: "Hyperfarm Global",
+      description:
+        "Full-stack web application designed for the global agricultural supply chain. A comprehensive platform for managing end-to-end B2B operations and transparent sourcing.",
+      url: "https://hyperfarm.global/",
+      icon: <Globe size={24} />,
+      tags: ["Full Stack", "Web Platform", "B2B Agriculture"],
+      impact: "Global Operations",
+    },
     {
       title: "Fashol Website",
       description:
@@ -81,11 +68,7 @@ export default function Projects() {
         "Comprehensive admin interface managing all Fashol applications, providing centralized control over the entire platform ecosystem.",
       url: "https://b2a.fashol.com/login",
       icon: <Settings size={24} />,
-      tags: [
-        "Admin Panel",
-        "Platform Control",
-        "B2A Management",
-      ],
+      tags: ["Admin Panel", "Platform Control", "B2A Management"],
       impact: "Operational Control",
     },
     {
@@ -158,9 +141,9 @@ export default function Projects() {
             Featured Projects
           </h2>
           <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
-            Key applications and platforms I've designed and
-            developed, contributing to significant business
-            growth and the complete Fashol B2B ecosystem.
+            Key applications and platforms I've designed and developed,
+            contributing to significant business growth and the complete Fashol
+            B2B ecosystem.
           </p>
 
           {/* Mobile Apps Section */}
@@ -181,16 +164,11 @@ export default function Projects() {
                         alt={`${app.title} icon`}
                         className="w-12 h-12 rounded-xl"
                       />
-                      <Badge
-                        variant="outline"
-                        className="w-fit"
-                      >
+                      <Badge variant="outline" className="w-fit">
                         {app.impact}
                       </Badge>
                     </div>
-                    <CardTitle className="mb-2">
-                      {app.title}
-                    </CardTitle>
+                    <CardTitle className="mb-2">{app.title}</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4 flex-grow flex flex-col">
                     <p className="text-muted-foreground leading-relaxed text-sm">
@@ -237,16 +215,11 @@ export default function Projects() {
                       <div className="p-3 bg-primary/10 rounded-xl text-primary">
                         {platform.icon}
                       </div>
-                      <Badge
-                        variant="outline"
-                        className="w-fit"
-                      >
+                      <Badge variant="outline" className="w-fit">
                         {platform.impact}
                       </Badge>
                     </div>
-                    <CardTitle className="mb-2">
-                      {platform.title}
-                    </CardTitle>
+                    <CardTitle className="mb-2">{platform.title}</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4 flex-grow flex flex-col">
                     <p className="text-muted-foreground leading-relaxed text-sm">
@@ -267,10 +240,7 @@ export default function Projects() {
                     <div className="pt-2">
                       <WebPlatformButton
                         url={platform.url}
-                        title={platform.title.replace(
-                          "Fashol ",
-                          "",
-                        )}
+                        title={platform.title.replace("Fashol ", "")}
                       />
                     </div>
                   </CardContent>
